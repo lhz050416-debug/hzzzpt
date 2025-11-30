@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">主页</a></li>
+                <li><a href="about.html" class="active">个人简介</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="notes.html">笔记</a></li>
+                <li><a href="message.html">留言板</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h1 class="page-title">个人简介</h1>
+        
+        <div class="about-container">
+            <div class="about-image">
+                <img src="img/img1.jpg" alt="个人照片">
+            </div>
+            <div class="about-content">
+                <h2>关于我</h2>
+                <p>大家好！我是一名在校大学生，热爱编程和设计。拥有2年的Web开发经验，擅长使用HTML、CSS、JavaScript构建现代化的网站和应用。</p>
+                <p>我是兰州工业学院软件工程专业，对新技术充满热情，不断学习和探索前端领域的最新趋势。</p>
+                <p>除了编程，我还喜欢摄影、旅行和阅读。我相信多元化的兴趣爱好能够激发更多的创作灵感。</p>
+                
+                <div class="skills">
+                    <h2>技能专长</h2>
+                    
+                    <div class="skill-item">
+                        <h3>HTML/CSS</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3>JavaScript</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3>React</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3>UI/UX设计</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2025</span> lhz. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 年份更新
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        
+        // 移动端菜单
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        }
+    </script>
+</body>
+</html>

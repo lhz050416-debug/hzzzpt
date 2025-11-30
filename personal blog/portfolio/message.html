@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">主页</a></li>
+                <li><a href="about.html">个人简介</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="notes.html">笔记</a></li>
+                <li><a href="message.html" class="active">留言板</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h1 class="page-title">留言板</h1>
+        
+        <div class="message-form">
+            <h2>留下你的留言</h2>
+            <form id="message-form">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">留言内容</label>
+                    <textarea id="content" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">提交留言</button>
+            </form>
+        </div>
+        
+        <div class="messages-list" id="messages-list">
+            <!-- 留言将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2025</span> lhz. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/message.js"></script>
+    <script>
+        // 年份更新
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        
+        // 移动端菜单
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        }
+    </script>
+</body>
+</html>

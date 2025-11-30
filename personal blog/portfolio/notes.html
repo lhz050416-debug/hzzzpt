@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习笔记</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">主页</a></li>
+                <li><a href="about.html">个人简介</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="notes.html" class="active">笔记</a></li>
+                <li><a href="message.html">留言板</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h1 class="page-title">学习笔记</h1>
+        
+        <div class="notes-container">
+            <div class="note-item">
+                <h3>HTML5新特性总结</h3>
+                <p>记录了HTML5的主要新特性，包括语义化标签、Canvas、Web Storage等内容的学习笔记...</p>
+                <a href="#" class="btn">查看笔记</a>
+            </div>
+            
+            <div class="note-item">
+                <h3>CSS Grid布局详解</h3>
+                <p>详细介绍了CSS Grid布局的基本概念、属性和使用方法，包含多个实例和代码示例...</p>
+                <a href="#" class="btn">查看笔记</a>
+            </div>
+            
+            <div class="note-item">
+                <h3>JavaScript异步编程模式</h3>
+                <p>总结了JavaScript中的异步编程模式，包括回调函数、Promise、async/await等内容...</p>
+                <a href="#" class="btn">查看笔记</a>
+            </div>
+            
+            <div class="note-item">
+                <h3>React Hooks入门指南</h3>
+                <p>记录了React Hooks的基本概念和使用方法，包括useState、useEffect等常用Hook...</p>
+                <a href="#" class="btn">查看笔记</a>
+            </div>
+            
+            <div class="note-item">
+                <h3>前端性能优化策略</h3>
+                <p>总结了前端性能优化的各种策略和方法，从代码优化到资源加载优化的全面笔记...</p>
+                <a href="#" class="btn">查看笔记</a>
+            </div>
+        </div>
+        
+        <div class="notes-image">
+            <img src="https://p11-doubao-search-sign.byteimg.com/labis/4f49c33b5920c0d0cc26ad36c2536305~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1780055763&x-signature=6BaY%2BR1Wng9TGOYPTP0hDWNWIsw%3D" alt="学习笔记">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2025</span> lhz. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 年份更新
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        
+        // 移动端菜单
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        }
+    </script>
+</body>
+</html>

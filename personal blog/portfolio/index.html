@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">主页</a></li>
+                <li><a href="about.html">个人简介</a></li>
+                <li><a href="blog.html">博客</a></li>
+                <li><a href="notes.html">笔记</a></li>
+                <li><a href="message.html">留言板</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>欢迎来到我的个人网站</h1>
+            <p>探索我的作品、想法和旅程</p>
+            <a href="about.html" class="btn">了解更多</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/500x400?text=Hero+Image" alt="Hero Image">
+        </div>
+    </section>
+
+    <!-- 特性卡片 -->
+    <section class="features">
+        <div class="feature-card">
+            <i class="fa fa-user"></i>
+            <h3>个人简介</h3>
+            <p>了解我的教育背景、技能和经历</p>
+            <a href="about.html">查看详情 →</a>
+        </div>
+        <div class="feature-card">
+            <i class="fa fa-book"></i>
+            <h3>博客文章</h3>
+            <p>分享我的学习心得和技术见解</p>
+            <a href="blog.html">阅读博客 →</a>
+        </div>
+        <div class="feature-card">
+            <i class="fa fa-file-text"></i>
+            <h3>学习笔记</h3>
+            <p>整理的技术笔记和学习资料</p>
+            <a href="notes.html">查看笔记 →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2025</span> lhz. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 年份更新
+        const yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        
+        // 移动端菜单
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        }
+    </script>
+</body>
+</html>

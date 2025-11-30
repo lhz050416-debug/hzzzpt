@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客文章</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">主页</a></li>
+                <li><a href="about.html">个人简介</a></li>
+                <li><a href="blog.html" class="active">博客</a></li>
+                <li><a href="notes.html">笔记</a></li>
+                <li><a href="message.html">留言板</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h1 class="page-title">博客文章</h1>
+        
+        <div class="blog-header">
+            <div class="search-box">
+                <input type="text" placeholder="搜索博客文章..." id="search-input">
+                <button id="search-btn"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">全部</button>
+                <button class="category-btn" data-category="技术">技术</button>
+                <button class="category-btn" data-category="设计">设计</button>
+                <button class="category-btn" data-category="经验">经验</button>
+            </div>
+        </div>
+        
+        <div class="blog-grid" id="blog-grid">
+            <!-- 博客文章将通过JavaScript动态加载 -->
+        </div>
+        
+        <div class="pagination" id="pagination"></div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year">2025</span> lhz. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/blog-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置年份
+            const yearSpan = document.getElementById('year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // 移动端菜单
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            if (burger && nav) {
+                burger.addEventListener('click', () => {
+                    nav.classList.toggle('nav-active');
+                    burger.classList.toggle('toggle');
+                });
+            }
+
+            // 博客数据
+            let currentBlogs = blogData;
+            const blogGrid = document.getElementById('blog-grid');
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const paginationContainer = document.getElementById('pagination');
+            
+            // 每页显示的文章数量
+            const postsPerPage = 6;
+            let currentPage = 1;
+
+            // 渲染博客文章
+            function renderBlogs(blogs, page) {
+                if (!blogGrid) return;
+                
+                blogGrid.innerHTML = '';
+                
+                const startIndex = (page - 1) * postsPerPage;
+                const endIndex = startIndex + postsPerPage;
+                const blogsToShow = blogs.slice(startIndex, endIndex);
+                
+                if (blogsToShow.length === 0) {
+                    blogGrid.innerHTML = '<p style="text-align:center; width:100%;">没有找到相关文章</p>';
+                    paginationContainer.innerHTML = '';
+                    return;
+                }
+                
+                blogsToShow.forEach(post => {
+                    const blogCard = document.createElement('div');
+                    blogCard.className = 'blog-card';
+                    blogCard.dataset.category = post.category;
+                    blogCard.innerHTML = `
+                        <div class="blog-image">
+                            <img src="${post.image}" alt="${post.title}">
+                        </div>
+                        <div class="blog-content">
+                            <span class="category">${post.category}</span>
+                            <h3>${post.title}</h3>
+                            <p>${post.excerpt}</p>
+                            <div class="blog-meta">
+                                <span>${post.date}</span>
+                                <a href="blog-detail.html?id=${post.id}" class="read-more">阅读更多</a>
+                            </div>
+                        </div>
+                    `;
+                    blogGrid.appendChild(blogCard);
+                });
+                
+                renderPagination(blogs.length, page);
+            }
+
+            // 渲染分页
+            function renderPagination(totalPosts, currentPage) {
+                if (!paginationContainer) return;
+                
+                const totalPages = Math.ceil(totalPosts / postsPerPage);
+                paginationContainer.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+                
+                // 上一页按钮
+                if (currentPage > 1) {
+                    const prevBtn = document.createElement('button');
+                    prevBtn.className = 'pagination-btn';
+                    prevBtn.textContent = '上一页';
+                    prevBtn.onclick = () => {
+                        renderBlogs(currentBlogs, currentPage - 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    };
+                    paginationContainer.appendChild(prevBtn);
+                }
+                
+                // 页码按钮
+                for (let i = 1; i <= totalPages; i++) {
+                    if (i === currentPage || 
+                        i === 1 || 
+                        i === totalPages || 
+                        (i >= currentPage - 1 && i <= currentPage + 1)) {
+                        
+                        const pageBtn = document.createElement('button');
+                        pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+                        pageBtn.textContent = i;
+                        pageBtn.onclick = () => {
+                            renderBlogs(currentBlogs, i);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        };
+                        paginationContainer.appendChild(pageBtn);
+                    } else if (i === currentPage - 2 || i === currentPage + 2) {
+                        const dots = document.createElement('span');
+                        dots.className = 'pagination-dots';
+                        dots.textContent = '...';
+                        paginationContainer.appendChild(dots);
+                    }
+                }
+                
+                // 下一页按钮
+                if (currentPage < totalPages) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'pagination-btn';
+                    nextBtn.textContent = '下一页';
+                    nextBtn.onclick = () => {
+                        renderBlogs(currentBlogs, currentPage + 1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    };
+                    paginationContainer.appendChild(nextBtn);
+                }
+            }
+
+            // 搜索功能
+            function searchBlogs() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (!searchTerm) {
+                    currentBlogs = blogData;
+                } else {
+                    currentBlogs = blogData.filter(post => 
+                        post.title.toLowerCase().includes(searchTerm) || 
+                        post.excerpt.toLowerCase().includes(searchTerm) ||
+                        post.content.toLowerCase().includes(searchTerm)
+                    );
+                }
+                renderBlogs(currentBlogs, 1);
+            }
+
+            // 分类筛选
+            function filterByCategory(category) {
+                if (category === 'all') {
+                    currentBlogs = blogData;
+                } else {
+                    currentBlogs = blogData.filter(post => post.category === category);
+                }
+                renderBlogs(currentBlogs, 1);
+            }
+
+            // 事件监听器
+            if (searchBtn) {
+                searchBtn.addEventListener('click', searchBlogs);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') {
+                        searchBlogs();
+                    }
+                });
+            }
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterByCategory(btn.dataset.category);
+                });
+            });
+
+            // 初始化
+            renderBlogs(blogData, 1);
+        });
+    </script>
+</body>
+</html>
